@@ -1,0 +1,12 @@
+{
+  "inputFiles": [
+    "./src"
+  ],
+  "mode": "file",
+  "plugin": [
+    "typedoc-plugin-markdown"
+  ],
+  "out": "docs",
+  "name": "libDemo",
+  "readme": "none"
+}

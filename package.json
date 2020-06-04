@@ -1,0 +1,41 @@
+{
+  "name": "lib_demo",
+  "version": "1.0.0",
+  "description": "This project is demonstrating how to create your own library using TypeScript and Webpack 4.",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "npm run lint && npm run build:prod",
+    "build:dev": "webpack --mode=development --progress --colors",
+    "build:prod": "webpack --mode=production --progress --colors",
+    "docs": "typedoc",
+    "lint": "tslint -p .",
+    "test": "mocha -r ts-node/register src/**/*.spec.ts"
+  },
+  "keywords": [],
+  "homepage": "https://www.sibvrv.com",
+  "repository": "https://github.com/sibvrv/webpack-typescript-library-boilerplate",
+  "author": "Roman Vereshchagin",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chai": "^4.2.7",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^14.0.10",
+    "@types/webpack": "^4.41.17",
+    "@types/webpack-merge": "^4.1.5",
+    "chai": "^4.2.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "mocha": "^7.2.0",
+    "ts-loader": "^7.0.5",
+    "ts-node": "^8.10.2",
+    "tsconfig-paths": "^3.9.0",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "tslint": "^6.1.2",
+    "typedoc": "^0.17.7",
+    "typedoc-plugin-markdown": "^2.2.17",
+    "typescript": "^3.9.3",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  }
+}
