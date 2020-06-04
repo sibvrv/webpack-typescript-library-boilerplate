@@ -1,4 +1,5 @@
 const path = require('path');
+const pkg = require('./package.json');
 
 // Plugins
 const TSConfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
@@ -12,13 +13,14 @@ const outPath = path.join(__dirname, `./dist/`);
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
   const buildDate = new Date();
-  const {
-    npm_package_name,
-    npm_package_license,
-    npm_package_version,
-    npm_package_homepage,
-    npm_package_repository_url
-  } = process.env;
+
+  const libraryName = pkg.name;
+  const libraryBanner = `${pkg.name}\n${pkg.description}\n
+@version v${pkg.version} - ${buildDate.toISOString()}
+@author ${pkg.author}
+@homepage ${pkg.homepage}
+@repository ${pkg.repository.url}
+@license ${pkg.license}`;
 
   return {
     context: sourcePath,
@@ -27,7 +29,7 @@ module.exports = (env, argv) => {
     ],
     output: {
       publicPath: '/',
-      library: 'lib_demo',
+      library: libraryName,
       libraryTarget: 'umd',
       path: outPath,
       filename: isProduction ? '[name].js' : '[name].js',
@@ -53,22 +55,12 @@ module.exports = (env, argv) => {
       new CleanWebpackPlugin(),
       new DefinePlugin({
         '__LIB_VERSION__': JSON.stringify({
-          build: npm_package_version,
+          build: pkg.version,
           date: buildDate.toISOString(),
           stamp: Math.floor(buildDate.getTime() / 1000)
         })
       }),
-      new BannerPlugin(
-        [
-          npm_package_name,
-          `Version: ${npm_package_version}`,
-          `Build Date: ${buildDate.toISOString()}`,
-          `License: ${npm_package_license}`,
-          `Homepage: ${npm_package_homepage}`,
-          `Repository: ${npm_package_repository_url}`
-        ]
-          .join('\n')
-      )
+      new BannerPlugin(libraryBanner)
     ],
     devtool: isProduction ? 'hidden-source-map' : 'cheap-module-eval-source-map'
   };

@@ -15,7 +15,9 @@
   },
   "keywords": [],
   "homepage": "https://www.sibvrv.com",
-  "repository": "https://github.com/sibvrv/webpack-typescript-library-boilerplate",
+  "repository": {
+    "url": "https://github.com/sibvrv/webpack-typescript-library-boilerplate"
+  },
   "author": "Roman Vereshchagin",
   "license": "MIT",
   "devDependencies": {
